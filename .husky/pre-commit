@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+echo "pre-commit hook activated..."
+echo "try to lint & type checking..."
+
+yarn lint
+yarn check-types

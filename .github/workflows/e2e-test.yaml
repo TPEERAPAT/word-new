@@ -1,0 +1,29 @@
+name: e2e test (cypress)
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Dependencies
+        run: yarn install
+      - name: Build Code
+        run: yarn build
+      - uses: cypress-io/github-action@v5
+        with:
+          browser: chrome
+          headed: true
+          install: true
+          start: yarn start
+          wait-on: http://localhost:3000
+          wait-on-timeout: 60
